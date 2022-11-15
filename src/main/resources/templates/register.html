@@ -1,0 +1,51 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<title>Server Programming with Spring Boot</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
+
+
+</head>
+<body>
+
+<h1> Register </h1>
+
+
+
+		<form th:object="${user}" th:action="@{../saveuser}" action="#" method="post">		
+			
+			<label for="username">Username</label> 
+			<input type="text" id="username" th:field="*{username}" required />
+			<div style="clear: both; display: block; height: 10px;"></div>
+			
+			<label for="password">Password</label> 
+			<input type="password" id="password" th:field="*{password}" required />
+			<div style="clear: both; display: block; height: 10px;"></div>
+			
+			<label for="email">Email</label> 
+			<input type="text" id="email" th:field="*{email}" required />
+			<div style="clear: both; display: block; height: 10px;"></div>
+			
+			<input type="hidden" th:field="*{role}" th:value="USER" class="form-control"/>
+			<input type="submit" class="btn btn-success" value="Save"></input>
+			
+		</form>
+		
+    	
+
+		<form action="../">
+		<div style="clear: both; display: block; height: 10px;"></div>
+    		<input type="submit" value="Back" />
+    		
+		</form>
+	
+
+
+		
+
+ 
+
+</body>
+</html>

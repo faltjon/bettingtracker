@@ -1,0 +1,25 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<title>Server Programming with Spring Boot</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
+
+</head>
+<body>
+
+<h1> Add new sport </h1>
+
+		<form th:object="${sportstype}" th:action="@{../savesport/{id}(id=${id})}" action="#" method="post">
+			<label for="sportsName">Sport name</label> 
+			<input type="text" id="sportsName" th:field="*{sportsName}" />
+			<div style="clear: both; display: block; height: 10px;"></div>
+			
+			
+			<input type="submit" class="btn btn-success" value="Save"></input>
+		</form>
+ 
+
+</body>
+</html>

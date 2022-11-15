@@ -1,0 +1,107 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<title>Server Programming with Spring Boot</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
+
+
+</head>
+<body>
+
+<h1> Add new bet </h1>
+
+
+
+		<form th:object="${betdata}" th:action="@{../save}" action="#" method="post">		
+			<input type="hidden" th:field="*{users.userID}" class="form-control"/>
+		
+			<label for="team1">Team 1</label> 
+			<input type="text" id="team1" th:field="*{team1}" />
+			<div style="clear: both; display: block; height: 10px;"></div>
+			
+			<label for="team2">Team 2</label> 
+			<input type="text" id="team2" th:field="*{team2}" />
+			<div style="clear: both; display: block; height: 10px;"></div>
+			
+			<label for="betType">Bet type</label> 
+			<input type="text" id="betType" th:field="*{betType}" />
+			<span>(For example: Team 1, Team 2, X, 3 Maps, +1.5, etc...)</span>
+			<div style="clear: both; display: block; height: 10px;"></div>
+			
+			<label for="multiplier">Multiplier</label> 
+			<input type="text" id="multiplier" th:field="*{multiplier}" oninput="calculateWins()"/>
+			<div style="clear: both; display: block; height: 10px;"></div>
+			
+			<label for="wager">Wager amount</label> 
+			<input type="text" id="wager" th:field="*{wager}" oninput="calculateWins()"/>
+			<div style="clear: both; display: block; height: 10px;"></div>
+			
+			<label for="result">Result</label> 
+			<select id="result" th:field="*{result}" onchange="calculateWins()">
+  				<option value="Won">Won</option>
+  				<option value="Lost">Lost</option>
+			</select> 
+			<div style="clear: both; display: block; height: 10px;"></div>
+			
+			<label for="bankChange">Won / Lost</label> 
+			<input type="text" th:id="bankChange" readonly th:field="*{bankChange}" />
+			
+			<div style="clear: both; display: block; height: 10px;"></div>
+			
+			<label for="sportslist">Sport Type</label>
+			 <select id="sportslist" th:field="*{sportsType}">
+       			<option th:each="sport: ${sportslist}" th:value="${sport.sportsID}" th:text="${sport.sportsName}"></option>
+    		</select>
+    		<a href="/addsport" class="btn btn-success">Add new sport</a>
+    		<div style="clear: both; display: block; height: 10px;"></div>
+    		
+    		<label for="bookerlist">Bookmaker</label>
+			 <select id="bookerlist" th:field="*{bookmaker}">
+       			<option th:each="bookmaker: ${bookerlist}" th:value="${bookmaker.bookmakerID}" th:text="${bookmaker.bookmakerName}"></option>
+    		</select>
+			<a href="/addbookie" class="btn btn-success">Add new Bookmaker</a>
+			<div style="clear: both; display: block; height: 10px;"></div>
+			
+			<input type="submit" class="btn btn-success" value="Save"></input>
+			
+		</form>
+		
+    	
+
+		<form action="../">
+		<div style="clear: both; display: block; height: 10px;"></div>
+    		<input type="submit" value="Back" />
+    		
+		</form>
+	
+
+
+		
+		
+		<script type="text/javascript">
+    function calculateWins() {
+        var multiplier = document.getElementById("multiplier").value;
+        var wager = document.getElementById("wager").value;
+        var winsTotal = document.getElementById("bankChange");
+        
+        var result = document.getElementById("result").value;
+        
+        
+        if (result == "Won") {
+     		var fixedNum = wager * multiplier - wager
+     		winsTotal.value = fixedNum.toFixed(2);
+        	} else {
+        	winsTotal.value = wager - (wager *2) 
+        	}
+
+    }
+    
+  
+    calculateWins();
+</script>
+ 
+
+</body>
+</html>

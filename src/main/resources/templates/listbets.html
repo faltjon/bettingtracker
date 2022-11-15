@@ -1,0 +1,65 @@
+<!DOCTYPE HTML>
+
+<html xmlns:th="http://www.thymeleaf.org">
+<link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
+<head>
+<title>Server Programming with Spring Boot</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+
+</head>
+
+<body>
+
+
+
+
+<h1 th:inline="text">List of your bets [[${#httpServletRequest.remoteUser}]]</h1>
+
+<a href="/adddepo" class="btn btn-success">Add deposit</a>
+<p th:inline="text"> Your total deposits = [[${alldeposits}]] </p>
+</div>
+<table class="table table-striped">
+<tr>
+<th>Team1</th>
+<th>Team2</th>
+<th>Type of bet</th>
+<th>Multiplier</th>
+<th>Wager amount</th>
+<th>Result</th>
+<th>Won / Lost amount</th>
+<th>Sports type</th>
+<th>Bookmaker name</th>
+<th></th>
+<th></th>
+</tr>
+
+<tr th:each = "bet : ${bets}">
+<td th:text="${bet.team1}"></td>
+<td th:text="${bet.team2}"></td>
+<td th:text="${bet.betType}"></td>
+<td th:text="${bet.multiplier}"></td>
+<td th:text="${bet.wager}"></td>
+<td th:text="${bet.result}"></td>
+<td th:text="${bet.bankChange}"></td>
+<td th:text="${bet.sportsType.sportsName}"></td>
+<td th:text="${bet.bookmaker.bookmakerName}"></td>
+
+<td><a th:href="@{/delete/{id}(id=${bet.betDataID})}" class="btn btn-danger" >Delete</a></td>
+<td><a th:href="@{/edit/{id}(id=${bet.betDataID})}" class="btn btn-success" >Edit</a></td>
+</tr>
+</table>
+
+
+<a href="/add" class="btn btn-success">Add Bet</a>
+<div style="clear: both; display: block; height: 10px;"></div>
+
+<form th:action="@{/logout}" method="post">
+<input type="submit" value="Sign Out"/>
+</form>
+
+
+
+</body>
+</div>
+</html>
