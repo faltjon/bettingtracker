@@ -58,7 +58,7 @@ public class BettingTrackerRepositoryTests {
 		assertThat(user.getEmail()).isEqualTo(newuser.getEmail());
 	}
 
-	@Test
+	@Test // Tests that testuser is deleted
 	public void deleteNewUser() {
 		Users user = urepository.findByUsername("testuser");
 		assertThat(user.getUserID()).isNotNull();
@@ -67,7 +67,7 @@ public class BettingTrackerRepositoryTests {
 
 	}
 
-	@Test
+	@Test // Tests that new Bookmaker is created
 	public void createNewBookmaker() {
 		Bookmaker bookie = new Bookmaker("Testbookie");
 		bmrepository.save(bookie);
@@ -75,6 +75,7 @@ public class BettingTrackerRepositoryTests {
 		assertThat(bmrepository.findByBookmakerName("Testbookie")).isNotNull();
 	}
 
+	// Tests that testbookie is deleted
 	@Test
 	public void deleteNewBookmaker() {
 		Bookmaker bookie = bmrepository.findByBookmakerName("Testbookie").get(0);
@@ -83,6 +84,7 @@ public class BettingTrackerRepositoryTests {
 		assertThat(bmrepository.findByBookmakerName("Testbookie").isEmpty());
 	}
 
+	// Tests that new SportsType is created
 	@Test
 	public void createNewSport() {
 		SportsType sport = new SportsType("testisportti");
@@ -91,6 +93,7 @@ public class BettingTrackerRepositoryTests {
 		assertThat(srepository.findBySportsName("testisportti")).isNotNull();
 	}
 
+	// Tests that testisportti is deleted
 	@Test
 	public void deleteNewSport() {
 		SportsType sport = srepository.findBySportsName("testisportti").get(0);
@@ -99,6 +102,7 @@ public class BettingTrackerRepositoryTests {
 		assertThat(srepository.findBySportsName("testisportti").isEmpty());
 	}
 
+	// Tests that new Deposit is given to user
 	@Test
 	public void createNewDeposit() {
 		Users user = urepository.findByUsername("user1");
@@ -108,6 +112,7 @@ public class BettingTrackerRepositoryTests {
 		assertThat(deporepository.findByUsers(user).get(0)).isNotNull();
 	}
 
+	// Finds user with deposit 999.9 and deletes it
 	@Test
 	public void deleteNewDeposit() {
 
@@ -121,6 +126,7 @@ public class BettingTrackerRepositoryTests {
 		assertThat(deporepository.findByAmount(999.9)).isEmpty();
 	}
 
+	// Very simple BetData creation test
 	@Test
 	public void createNewBetData() {
 
@@ -131,6 +137,7 @@ public class BettingTrackerRepositoryTests {
 
 	}
 
+	// Deletes BetData with BetType "testityyppi"
 	@Test
 	public void deleteNewBetData() {
 
