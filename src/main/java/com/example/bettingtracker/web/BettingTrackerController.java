@@ -53,16 +53,25 @@ public class BettingTrackerController {
 		Long currentUserID = curruser.getUserID();
 		System.out.println("Current user ID is: " + currentUserID);
 
-		List<Deposit> deposits = depoRepository.findByUsers(curruser);
+		List<Deposit> depositslist = depoRepository.findByUsers(curruser);
+		List<BetData> winlosslist = betrepository.findByUsers(curruser);
 
 		Double alldeposits = 0.0;
-		for (int i = 0; i < deposits.size(); i++) {
-			alldeposits += deposits.get(i).getAmount();
+		for (int i = 0; i < depositslist.size(); i++) {
+			alldeposits += depositslist.get(i).getAmount();
 		}
+
+		Double allwins = 0.0;
+		for (int i = 0; i < winlosslist.size(); i++) {
+			allwins += winlosslist.get(i).getBankChange();
+		}
+
+		System.out.println("All bankChange amount= " + allwins);
 		System.out.println("All deposits amount= " + alldeposits);
 
 		System.out.println("List of current user bets: " + betrepository.findByUsers(curruser));
 		model.addAttribute("alldeposits", alldeposits);
+		model.addAttribute("allwins", allwins);
 		model.addAttribute("bets", betrepository.findByUsers(curruser));
 		return "listbets";
 	}
