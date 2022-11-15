@@ -9,4 +9,6 @@ public interface BetDataRepository extends CrudRepository<BetData, Long> {
 	List<BetData> findByUsers(Users users);
 
 	BetData findByTeam1(String team1);
+
+	BetData findByBetType(String bettype);
 }
